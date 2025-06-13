@@ -36,19 +36,6 @@ body {
     color: rgb(255, 238, 220);
 }
 
-.emailinputcontainer {
-    margin-top: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.emailinput {
-    width: 15vw;
-    height: 2vh;
-    background-color: rgb(255, 238, 220);
-}
-
 .optionscontainer {
     display: flex;
     align-items: center;
