@@ -68,7 +68,7 @@ body {
     margin-bottom: 17vh;
     height: 0 auto;
     width: 0 auto;
-    
+
 }
 
 .leftgroup {
@@ -81,4 +81,22 @@ body {
 }
 .afterimg {
     transform: scale(1.2);
+}
+
+.bookbuttoncontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bookbutton {
+    width: 20vw;
+    height: 10vh;
+    border-radius: 15px;
+    background-color: rgb(29, 121, 76);
+    color: rgb(255, 238, 220);
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.5vw;
+    margin-bottom: 15vh;
 }
