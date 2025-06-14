@@ -18,13 +18,11 @@
     </div>
     <form id="contact-form">
         <div class="inputcontainer">
-            <input class="input" id="user_email" autocomplete="off" placeholder="you@example.com">
-            <input class="input" id="user_name" autocomplete="off" placeholder="First name">
-            <button class="enterbutton" onclick="enterInfo()">Enter</button>
+            <input class="emailinput" id="user_email" autocomplete="off" placeholder="you@example.com">
+            <input class="nameinput" id="user_name" autocomplete="off" placeholder="First name">
+            <button class="enterbutton" type="button">Enter</button>
         </div>
-    <div class="feedback" id="feedback">
-
-    </div>
+    <div class="feedback" id="feedback"></div>
     </form>
     
     <script type="module">
@@ -36,19 +34,26 @@
 
 var email;
 var name;
-document.getElementById("user_email").addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    email = event.target.value;
-    name = document.getElementById("user_name").value;
-    verifyInfo(email, name);
+var jobType = localStorage.getItem("jobType");
+var jobPrice = localStorage.getItem("jobPrice");
+var jobTime = localStorage.getItem("jobTime");
+
+document.getElementById("pagetitle").textContent = "Book an " + jobType + "!";
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    enterInfo();
   }
 });
 
+document.querySelector(".enterbutton").addEventListener("click", enterInfo);
+
 function enterInfo() {
-    email = document.getElementById("user_email").value;
-    name = document.getElementById("user_name").value;
-    alert("recieved info!");
-    verifyInfo(email, name);
+
+    if (event) event.preventDefault(); // stops form from submitting
+  email = document.getElementById("user_email").value;
+  name = document.getElementById("user_name").value;
+  verifyInfo(email, name);
 }
 
 function verifyInfo(email, name) {
@@ -58,15 +63,16 @@ function verifyInfo(email, name) {
 
         const templateParams = {
             user_name: name,
-            user_email: email
+            user_email: email,
+            job_type: jobType,
+            job_price: jobPrice,
+            job_time: jobTime
         };
-        alert("verification success");
         sendEmail(templateParams);
     }
     else {
-        document.getElementById("feedback").innerText = "Invalid email: please retry.";
+        document.getElementById("feedback").innerText = "Invalid email or empty name field: please retry.";
         document.getElementById("feedback").style.color = "red";
-        alert("verification failed");
     }
 }
 
@@ -74,15 +80,31 @@ function sendEmail(templateParams) {
   // Email to yourself
   emailjs.send("service_ik0q0xg", "template_3uxpuza", {
     user_name: templateParams.user_name,
-    user_email: "spicercardetailing@gmail.com", // YOUR email hardcoded
+    user_email: templateParams.user_email,
+    job_type: templateParams.job_type,
+    job_price: templateParams.job_price,
+    job_time: templateParams.job_time,
+    email: "spicercardetailing@gmail.com", // YOUR email hardcoded
   })
-  .then(() => console.log("Internal email sent"))
+  .then(() => {
+    const feedback = document.getElementById("feedback");
+    feedback.innerText = "Email Sent Successfully!";
+    feedback.style.color = "green";
+  })
   .catch((error) => console.error("Internal email failed:", error));
 
   // Email to the customer
   emailjs.send("service_ik0q0xg", "template_8v8bf4r", templateParams)
-  .then(() => alert("Confirmation sent to customer!"))
-  .catch((error) => alert("Failed to send confirmation."));
+    .then(() => {
+    const feedback = document.getElementById("feedback");
+    feedback.innerText = "Email Sent Successfully!";
+    feedback.style.color = "green";
+  })
+  .catch((error) => {
+    const feedback = document.getElementById("feedback");
+    feedback.innerText = "Failed to Send Email: Try Again.";
+    feedback.style.color = "red";
+    });
 }</script>
 </body>
 </html>
