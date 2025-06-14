@@ -13,6 +13,15 @@ body {
     justify-content: center;
 }
 
+.locationcontainer {
+    color: rgb(255, 238, 220);
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 1vw;
+    font-weight: 100;
+    margin-bottom: 4vh;
+}
+
 .logosep {
     width: 80vw;
     margin-bottom: 5vh;
