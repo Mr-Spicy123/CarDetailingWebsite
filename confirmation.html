@@ -14,15 +14,75 @@
     <hr class="logosep">
     <div class="pagetitle" id="pagetitle"></div>
     <div class="bookinginstructions">
-        Enter your email below to contant us, and we will reach out with our availability as soon as possible! We take payment in cash or E-Transfer when you pick up your detailed vehicle!
+        Enter your info below to contant us, and we will reach out with our availability as soon as possible! We take payment in cash or E-Transfer when you pick up your detailed vehicle!
     </div>
-    <div class="emailinputcontainer">
-        <input class="emailinput" id="emailinput" autocomplete="off" placeholder="you@example.com">
-        <button class="emailenterbutton" onclick="enterEmail()">Enter</button>
-    </div>
+    <form id="contact-form">
+        <div class="inputcontainer">
+            <input class="input" id="user_email" autocomplete="off" placeholder="you@example.com">
+            <input class="input" id="user_name" autocomplete="off" placeholder="First name">
+            <button class="enterbutton" onclick="enterInfo()">Enter</button>
+        </div>
     <div class="feedback" id="feedback">
 
     </div>
-    <script src="confirmation.js"></script>
+    </form>
+    
+    <script type="module">
+    import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/+esm';
+
+  emailjs.init('-DYfRv7o-Frgm4EGW');
+
+
+
+var email;
+var name;
+document.getElementById("user_email").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    email = event.target.value;
+    name = document.getElementById("user_name").value;
+    verifyInfo(email, name);
+  }
+});
+
+function enterInfo() {
+    email = document.getElementById("user_email").value;
+    name = document.getElementById("user_name").value;
+    alert("recieved info!");
+    verifyInfo(email, name);
+}
+
+function verifyInfo(email, name) {
+    if (email.includes("@") && email.includes(".") && (name)) {
+        document.getElementById("feedback").innerText = "Please wait: sending email...";
+        document.getElementById("feedback").style.color = "orange";
+
+        const templateParams = {
+            user_name: name,
+            user_email: email
+        };
+        alert("verification success");
+        sendEmail(templateParams);
+    }
+    else {
+        document.getElementById("feedback").innerText = "Invalid email: please retry.";
+        document.getElementById("feedback").style.color = "red";
+        alert("verification failed");
+    }
+}
+
+function sendEmail(templateParams) {
+  // Email to yourself
+  emailjs.send("service_ik0q0xg", "template_3uxpuza", {
+    user_name: templateParams.user_name,
+    user_email: "spicercardetailing@gmail.com", // YOUR email hardcoded
+  })
+  .then(() => console.log("Internal email sent"))
+  .catch((error) => console.error("Internal email failed:", error));
+
+  // Email to the customer
+  emailjs.send("service_ik0q0xg", "template_8v8bf4r", templateParams)
+  .then(() => alert("Confirmation sent to customer!"))
+  .catch((error) => alert("Failed to send confirmation."));
+}</script>
 </body>
 </html>
