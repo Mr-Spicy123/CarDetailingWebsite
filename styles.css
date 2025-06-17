@@ -14,7 +14,7 @@ body {
     justify-content: center;
 }
 
-.locationcontainer {
+.infocontainer {
     margin-top: 10vh;
     color: rgb(255, 238, 220);
     font-family: sans-serif;
@@ -71,11 +71,27 @@ body {
     margin-top: 5vh;
 }
 
+.photoframelabelcontainer {
+    margin-top: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28vw; /*half of photoframe width - 7vw*/
+}
+
+.photoframelabel {
+    font-family: sans-serif;
+    font-size: 2vw;
+    color: white;
+    font-weight: bold;
+    text-decoration-line: underline;
+}
+
 .beforeandaftercontainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5vh;
+    margin-top: 2vh;
     margin-bottom: 5vh;
 }
 
@@ -83,7 +99,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80vw;
+    width: 70vw;
     height: 60vh;
     border-radius: 15px;
     background-color: white;
@@ -91,7 +107,7 @@ body {
 
 .beforeside {
     display: flex;
-    width: 40vw; /*half of photoframe width*/
+    width: 35vw; /*half of photoframe width*/
     height: 60vh; /*same as photoframe height*/
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
@@ -100,7 +116,7 @@ body {
 
 .beforeimage {
     display: flex;
-    width: 40vw; /*half of photoframe width*/
+    width: 35vw; /*half of photoframe width*/
     height: 60vh; /*same as photoframe height*/
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
@@ -122,7 +138,7 @@ body {
 
 .afterside {
     display: flex;
-    width: 40vw; /*half of photoframe width*/
+    width: 35vw; /*half of photoframe width*/
     height: 60vh; /*same as photoframe height*/
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -130,7 +146,7 @@ body {
 }
 
 .afterimage {
-    width: 40vw; /*half of photoframe width*/
+    width: 35vw; /*half of photoframe width*/
     height: 60vh; /*same as photoframe height*/
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
